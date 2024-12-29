@@ -1,4 +1,5 @@
 import os
+import textwrap
 from dotenv import load_dotenv
 from crewai import Crew, Task
 from agents.romberg_agent import RombergAgent
@@ -6,6 +7,11 @@ from tools.search_tools import SearchTools
 
 # Load environment variables
 load_dotenv()
+
+def format_response(text):
+    # Wrap text to 80 characters and remove extra whitespace
+    wrapped_text = textwrap.fill(text.strip(), width=80, replace_whitespace=False)
+    return wrapped_text
 
 def main():
     # Initialize tools
@@ -35,9 +41,9 @@ def main():
             verbose=True
         )
         
-        # Execute the task
+        # Execute the task and format the response
         response = crew.kickoff()
-        print(f"\nOsvaldo: {response}")
+        print(f"\n{format_response(response)}\n")
 
 if __name__ == "__main__":
     main() 
