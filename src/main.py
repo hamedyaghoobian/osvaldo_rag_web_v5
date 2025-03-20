@@ -36,7 +36,14 @@ def speak_text(text):
         audio = eleven_labs.generate(
             text=text,
             voice=VOICE_ID,
-            model="eleven_monolingual_v1"
+            model="eleven_multilingual_v2",
+            voice_settings={
+                "stability": 0.26,
+                "similarity_boost": 0.84,
+                "style": 0.74,
+                "use_speaker_boost": True,
+                "speed": 1.0
+            }
         )
         
         # Save to a temporary file
