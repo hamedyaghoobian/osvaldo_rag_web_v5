@@ -23,8 +23,26 @@ def format_response(text):
         text = text.final_output
     elif hasattr(text, 'raw_output'):
         text = text.raw_output
+    
     # Convert to string if it's not already
     text = str(text)
+    
+    # Make text more conversational
+    text = text.replace("USA", "the United States")
+    text = text.replace("United States of America", "the United States")
+    
+    # More natural replacements
+    formal_phrases = {
+        "significant accomplishment": "big achievement",
+        "notable achievement": "really exciting moment",
+        "exploration of": "exploring",
+        "have been central themes": "have been really important throughout",
+        "artistic journey": "career as an artist"
+    }
+    
+    for formal, casual in formal_phrases.items():
+        text = text.replace(formal, casual)
+    
     # Wrap text to 80 characters and remove extra whitespace
     wrapped_text = textwrap.fill(text.strip(), width=80, replace_whitespace=False)
     return wrapped_text
