@@ -1,6 +1,6 @@
 # Osvaldo Romberg Chat Model v5
 
-An AI-powered chat model that embodies the personality and knowledge of Argentine artist Osvaldo Romberg (1938-2019).
+An AI-powered chat model that embodies the personality and knowledge of Argentine artist Osvaldo Romberg (1938-2019). The model now includes text-to-speech capabilities using Eleven Labs to bring Osvaldo's responses to life.
 
 ## Setup
 
@@ -14,6 +14,8 @@ pip install -r requirements.txt
 ```bash
 OPENAI_API_KEY=your_openai_api_key
 SERPER_API_KEY=your_serper_api_key
+ELEVENLABS_API_KEY=your_elevenlabs_api_key
+ELEVENLABS_VOICE_ID=your_elevenlabs_voice_id
 ```
 
 ## Project Structure
@@ -41,4 +43,8 @@ Run the chat interface:
 python src/main.py
 ```
 
-Type your messages and interact with the Osvaldo Romberg AI model. Type 'exit' to quit the chat. 
+Type your messages and interact with the Osvaldo Romberg AI model. Each response will be:
+1. Displayed in the terminal
+2. Read aloud using the Eleven Labs text-to-speech API
+
+Type 'exit' to quit the chat. 
