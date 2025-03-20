@@ -1,4 +1,4 @@
-# Osvaldo Romberg Chat Model
+# Osvaldo Romberg Chat Model v5
 
 An AI-powered chat model that embodies the personality and knowledge of Argentine artist Osvaldo Romberg (1938-2019).
 
