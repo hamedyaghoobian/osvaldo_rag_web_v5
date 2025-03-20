@@ -9,6 +9,12 @@ from tools.search_tools import SearchTools
 load_dotenv()
 
 def format_response(text):
+    if hasattr(text, 'final_output'):
+        text = text.final_output
+    elif hasattr(text, 'raw_output'):
+        text = text.raw_output
+    # Convert to string if it's not already
+    text = str(text)
     # Wrap text to 80 characters and remove extra whitespace
     wrapped_text = textwrap.fill(text.strip(), width=80, replace_whitespace=False)
     return wrapped_text
@@ -31,7 +37,8 @@ def main():
         task = Task(
             description=user_input,
             agent=romberg,
-            tools=search_tools.get_tools()
+            tools=search_tools.get_tools(),
+            expected_output="A conversational response from Osvaldo Romberg"
         )
         
         # Create crew with the current task
