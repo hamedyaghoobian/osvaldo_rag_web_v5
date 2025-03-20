@@ -5,6 +5,7 @@ from crewai import Crew, Task
 from agents.romberg_agent import RombergAgent
 from tools.search_tools import SearchTools
 import elevenlabs
+from elevenlabs import ElevenLabs
 import tempfile
 import subprocess
 import platform
@@ -15,7 +16,7 @@ load_dotenv()
 # Configure Eleven Labs
 ELEVENLABS_API_KEY = os.getenv("ELEVENLABS_API_KEY", "sk_3f46c0e7fd0df2e4a16a9577d1665d4bd99f645ee9cad0a9")
 VOICE_ID = os.getenv("ELEVENLABS_VOICE_ID", "din8A7JQYRv0G2HvK2w0")
-elevenlabs.set_api_key(ELEVENLABS_API_KEY)
+eleven_labs = ElevenLabs(api_key=ELEVENLABS_API_KEY)
 
 def format_response(text):
     if hasattr(text, 'final_output'):
@@ -32,7 +33,7 @@ def speak_text(text):
     """Generate speech from text using Eleven Labs API and play it"""
     try:
         # Generate audio from text
-        audio = elevenlabs.generate(
+        audio = eleven_labs.generate(
             text=text,
             voice=VOICE_ID,
             model="eleven_monolingual_v1"
@@ -40,7 +41,8 @@ def speak_text(text):
         
         # Save to a temporary file
         temp_file = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3")
-        temp_file.write(audio)
+        for chunk in audio:
+            temp_file.write(chunk)
         temp_file.close()
         
         # Play the audio file based on the operating system
